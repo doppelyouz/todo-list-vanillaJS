@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      * {
+      }
+      .wrap {
+        text-align: center;
+      }
+      #input {
+        padding:10px;
+        border-radius:10px;
+        width:200px;
+        padding:10px;
+      }
+      #btn {
+        border:none;
+        text-decoration: none;
+        display: inline-block;
+        padding: 5px 20px;
+        margin: 10px 20px;
+        border-radius: 30px;
+        background-image: linear-gradient(45deg, #6ab1d7 0%, #33d9de 50%, #002878 100%);
+        background-position: 100% 0;
+        background-size: 200% 200%;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 24px;
+        font-weight: 300;
+        color: white;
+        box-shadow: 0 16px 32px 0 rgba(0, 40, 120, .35);
+        transition: .5s;
+      }
+      #btn:hover {
+        box-shadow: 0 0 0 0 rgba(0, 40, 120, 0);
+        background-position: 0 0;
+      }
+      #result {
+      }
+      .btn {
+        text-decoration: none;
+        display: inline-block;
+        padding: 5px 20px;
+        margin: 10px 20px;
+        position: relative;
+        overflow: hidden;
+        border: 2px solid #fe6637;
+        border-radius: 8px;
+        font-family: 'Montserrat', sans-serif;
+        color: #fe6637;
+        transition: .2s ease-in-out;
+      }
+      .btn:before {
+        content: "";
+        background: linear-gradient(90deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .5));
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        top: -8px;
+        left: -75px;
+        transform: skewX(-45deg);
+      }
+      .btn:hover {
+        background: #fe6637;
+        color: #fff;
+      }
+      .btn:hover:before {
+        left: 150px;
+        transition: .5s ease-in-out;
+      }
+      ul {
+        margin: auto 500px;
+      }
+      .li {
+        list-style-type: none; 
+      }
+      .li-active {
+        color:white;
+        text-decoration: line-through;
+        background-color: black;
+      }
+    </style>
+</head>
+<body>
+  <div class="wrap">
+    <input type="text" id="input" />
+    <button id="btn">add</button> 
+    <ul id="result">
+
+    </ul>
+  </div>
+  <script>
+    const input = document.querySelector('#input');
+    const btn = document.querySelector('#btn');
+    const result = document.querySelector('#result');
+
+    btn.addEventListener('click', (e) => {
+      if(input.value === "") return;
+      createDeleteElements(input.value);
+      input.value="";
+    })
+    function createDeleteElements(value) {
+      const li = document.createElement('li');
+      const btn = document.createElement('button');
+
+      li.className = 'li';
+      li.textContent = value;
+
+      btn.className = 'btn';
+      btn.textContent = 'delete';
+      li.appendChild(btn);
+
+      btn.addEventListener('click', (e) => {
+        result.removeChild(li);
+      })
+      
+      li.addEventListener('click', (e) => {
+        li.classList.toggle('li-active');
+      })
+
+      result.appendChild(li);
+    }
+  </script>
+</body>
+</html>
